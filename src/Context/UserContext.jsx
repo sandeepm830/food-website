@@ -1,27 +1,35 @@
-import React, { createContext, useState } from 'react'
-import FoodItems from '../data/FoodItems';
+import React, { createContext, useState, useEffect } from "react";
+import useFoodItems from "../components/hooks/useFoodItems";
 
 export const dataContext = createContext();
 
-function Usercontext({children}) {
-  const [cat, setCat] = useState(FoodItems);
-  let [input, setInput] = useState('');
- 
+function Usercontext({ children }) {
+  const [cat, setCat] = useState([]);
+  const [input, setInput] = useState("");
 
-  let data = {
-    input, setInput , cat, setCat
-  }
+  // Fetch food items using the custom hook
+  const foodItems = useFoodItems();
 
+  // Sync fetched food items with `cat` state when available
+  useEffect(() => {
+    if (foodItems.length > 0) {
+      setCat(foodItems);
+    }
+  }, [foodItems]);
+
+  const data = {
+    input,
+    setInput,
+    cat,
+    setCat,
+    foodItems, // ✅ Pass the original food list
+  };
 
   return (
-    <div>
-      <dataContext.Provider value = {data}>
+    <dataContext.Provider value={data}>
       {children}
-      </dataContext.Provider>
-     
-
-      </div>
-  )
+    </dataContext.Provider>
+  );
 }
 
-export default Usercontext
+export default Usercontext;

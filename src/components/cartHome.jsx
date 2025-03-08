@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../store/cartSlice";
 
+
 const CartHome = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartSubtotal, setSubtotal] = useState(0);

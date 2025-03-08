@@ -1,12 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import { categories } from "../Category";
-import FoodItems from "../data/FoodItems";
+// import FoodItems from "../data/FoodItems";
 import { GiThreeLeaves, GiMeat } from "react-icons/gi";
 import { dataContext } from "../Context/Usercontext";
 import CartHome from "../components/cartHome";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
+import useFoodItems from "../components/hooks/useFoodItems";
 
 
 
@@ -26,6 +27,10 @@ const handleAddToCart = (food) => {
    // Send item to the Redux store
 };
 
+// save useFoodItems to FoodItems to match the old array 
+ const FoodItems = useFoodItems();
+ 
+ 
 
 
 
